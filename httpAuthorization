@@ -1,0 +1,8 @@
+when ACCESS_PER_REQUEST_AGENT_EVENT {
+    set clientRemote "[IP::client_addr]:[TCP::client_port]"
+    set username [table lookup ${clientRemote}]
+    if {$username != ""} {
+        log local0. "Got Username ${username}"
+        ACCESS::perflow set perflow.scratchpad $username
+    }
+}
